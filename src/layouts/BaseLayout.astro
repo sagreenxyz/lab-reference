@@ -1,0 +1,152 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Nursing Lab Reference Values for Students' } = Astro.props;
+const base = (import.meta.env.BASE_URL as string).replace(/\/?$/, '/');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} | Nursing Lab Reference</title>
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <style>
+      /* ── Reset & Base ── */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --color-primary: #1a56a4;
+        --color-primary-dark: #0f3d7a;
+        --color-primary-light: #dbeafe;
+        --color-accent: #10b981;
+        --color-accent-light: #d1fae5;
+        --color-danger: #ef4444;
+        --color-danger-light: #fee2e2;
+        --color-warning: #f59e0b;
+        --color-warning-light: #fef3c7;
+        --color-text: #1f2937;
+        --color-text-muted: #6b7280;
+        --color-border: #e5e7eb;
+        --color-bg: #f9fafb;
+        --color-surface: #ffffff;
+        --radius: 0.5rem;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+        --shadow: 0 4px 12px rgba(0,0,0,.1);
+        --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-mono: 'Menlo', 'Monaco', monospace;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        color: var(--color-text);
+        background: var(--color-bg);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      a { color: var(--color-primary); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      /* ── Header ── */
+      .site-header {
+        background: var(--color-primary);
+        color: #fff;
+        padding: 0 1.5rem;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+        gap: 1rem;
+      }
+
+      .site-logo {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+      }
+      .site-logo:hover { text-decoration: none; opacity: 0.9; }
+
+      .site-nav {
+        display: flex;
+        gap: 0.25rem;
+        flex-wrap: wrap;
+      }
+
+      .nav-link {
+        color: rgba(255,255,255,.85);
+        padding: 0.35rem 0.75rem;
+        border-radius: var(--radius);
+        font-size: 0.9rem;
+        transition: background .15s;
+      }
+      .nav-link:hover, .nav-link.active {
+        background: rgba(255,255,255,.15);
+        color: #fff;
+        text-decoration: none;
+      }
+
+      /* ── Main ── */
+      main {
+        flex: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 2rem 1.5rem;
+      }
+
+      /* ── Footer ── */
+      .site-footer {
+        background: var(--color-primary-dark);
+        color: rgba(255,255,255,.7);
+        text-align: center;
+        padding: 1.25rem 1rem;
+        font-size: 0.85rem;
+      }
+      .site-footer strong { color: #fff; }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href={base} class="site-logo">🩺 Nursing Lab Reference</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href={base} class="nav-link">Home</a>
+          <a href={`${base}categories`} class="nav-link">All Categories</a>
+          <a href={`${base}about`} class="nav-link">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        <strong>Nursing Lab Reference</strong> — For educational use only.
+        Always verify values with your institution's reference ranges and clinical guidelines.
+      </p>
+    </footer>
+  </body>
+</html>
