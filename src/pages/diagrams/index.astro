@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = (import.meta.env.BASE_URL as string).replace(/\/?$/, '/');
+
+const diagrams = [
+  {
+    id: 'fishbone',
+    icon: '🐟',
+    title: 'Fishbone Diagram',
+    description:
+      'An Ishikawa / cause-and-effect diagram used in nursing notes to document patient assessment data by body system in a structured cross-shape.',
+  },
+  {
+    id: 'wire',
+    icon: '🧍',
+    title: 'Body Diagram',
+    description:
+      'Anterior and posterior wire/stick-figure body outlines used to mark wound locations, IV sites, drain placements, pain areas, and other findings.',
+  },
+];
+---
+
+<BaseLayout
+  title="Nursing Diagrams"
+  description="Interactive fishbone and body diagrams commonly used in handwritten nursing notes."
+>
+  <div class="page-header">
+    <a href={base} class="back-link">← Home</a>
+    <h1>📐 Nursing Documentation Diagrams</h1>
+    <p class="page-intro">
+      Nurses routinely use shorthand diagrams to record patient assessment data quickly and
+      clearly. This section provides interactive, printable versions of the two most common
+      documentation diagrams: the <strong>fishbone</strong> (body-system assessment) and the
+      <strong>body diagram</strong> (anatomical location marking).
+    </p>
+  </div>
+
+  <div class="diagram-grid">
+    {diagrams.map((d) => (
+      <a href={`${base}diagrams/${d.id}`} class="diagram-card">
+        <span class="diagram-icon">{d.icon}</span>
+        <div class="diagram-body">
+          <h2 class="diagram-title">{d.title}</h2>
+          <p class="diagram-desc">{d.description}</p>
+          <span class="diagram-cta">Open diagram →</span>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <section class="info-box">
+    <h2>💡 How These Diagrams Are Used</h2>
+    <p>
+      In clinical settings, nurses complete a head-to-toe assessment at the start of each shift.
+      Rather than writing lengthy paragraphs, many nurses use standardized diagram templates to
+      document findings concisely. These diagrams can be printed blank and filled in by hand, or
+      referenced on-screen during documentation.
+    </p>
+    <p>
+      Both diagrams on this site include a <strong>print mode</strong> — use your browser's print
+      function (<kbd>Ctrl+P</kbd> / <kbd>⌘P</kbd>) to get a clean, blank template ready for
+      handwriting.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header h1 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-intro {
+    color: var(--color-text-muted);
+    max-width: 720px;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .diagram-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .diagram-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    color: var(--color-text);
+  }
+  .diagram-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+    border-color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .diagram-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .diagram-body {
+    flex: 1;
+  }
+
+  .diagram-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .diagram-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .diagram-cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .info-box {
+    background: var(--color-primary-light);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    max-width: 720px;
+  }
+
+  .info-box h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.75rem;
+  }
+
+  .info-box p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 0.6rem;
+  }
+  .info-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  kbd {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+</style>

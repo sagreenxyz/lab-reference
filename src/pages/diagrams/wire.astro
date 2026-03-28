@@ -1,0 +1,406 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = (import.meta.env.BASE_URL as string).replace(/\/?$/, '/');
+
+const markings = [
+  { symbol: '✕', label: 'Wound / laceration' },
+  { symbol: '⊕', label: 'IV / vascular access site' },
+  { symbol: '○', label: 'Drain / tube exit site' },
+  { symbol: '△', label: 'Pain location' },
+  { symbol: '□', label: 'Dressing / wound care area' },
+  { symbol: '↑', label: 'Redness / erythema' },
+  { symbol: '≈', label: 'Rash / skin change' },
+  { symbol: '★', label: 'Surgical incision' },
+];
+---
+
+<BaseLayout
+  title="Body Diagram"
+  description="Interactive anterior and posterior body diagram for nursing documentation of wounds, IV sites, pain, and other findings."
+>
+  <div class="page-header">
+    <a href={`${base}diagrams`} class="back-link">← Diagrams</a>
+    <h1>🧍 Body / Wire Diagram</h1>
+    <p class="page-intro">
+      Nurses use <strong>body diagrams</strong> to document the location of wounds, IV sites,
+      drain placements, pain areas, rashes, and other physical findings. Hover over any shaded
+      region to see its anatomical label. Print this page to get a blank template for handwritten
+      clinical notes.
+    </p>
+  </div>
+
+  <div class="views-wrapper">
+    <!-- ANTERIOR VIEW -->
+    <figure class="body-figure">
+      <figcaption class="view-label">Anterior (Front)</figcaption>
+      <svg
+        viewBox="0 0 200 480"
+        xmlns="http://www.w3.org/2000/svg"
+        class="body-svg"
+        role="img"
+        aria-label="Anterior body diagram"
+      >
+        <!-- Head -->
+        <ellipse class="region" data-label="Head / Face" cx="100" cy="38" rx="30" ry="35" />
+        <!-- Neck -->
+        <rect class="region" data-label="Neck" x="88" y="71" width="24" height="20" rx="4" />
+        <!-- Chest -->
+        <rect class="region" data-label="Chest" x="60" y="91" width="80" height="60" rx="6" />
+        <!-- R Shoulder -->
+        <ellipse class="region" data-label="Right Shoulder" cx="52" cy="101" rx="18" ry="16" />
+        <!-- L Shoulder -->
+        <ellipse class="region" data-label="Left Shoulder" cx="148" cy="101" rx="18" ry="16" />
+        <!-- Abdomen -->
+        <rect class="region" data-label="Abdomen (RUQ)" x="60" y="151" width="40" height="35" rx="4" />
+        <rect class="region" data-label="Abdomen (LUQ)" x="100" y="151" width="40" height="35" rx="4" />
+        <rect class="region" data-label="Abdomen (RLQ)" x="60" y="186" width="40" height="35" rx="4" />
+        <rect class="region" data-label="Abdomen (LLQ)" x="100" y="186" width="40" height="35" rx="4" />
+        <!-- Pelvis / Groin -->
+        <rect class="region" data-label="Pelvis / Groin" x="68" y="221" width="64" height="30" rx="6" />
+        <!-- Right Arm -->
+        <rect class="region" data-label="Right Upper Arm" x="30" y="116" width="22" height="60" rx="8" />
+        <rect class="region" data-label="Right Forearm" x="30" y="178" width="22" height="55" rx="8" />
+        <!-- Right Hand -->
+        <ellipse class="region" data-label="Right Hand" cx="41" cy="248" rx="14" ry="12" />
+        <!-- Left Arm -->
+        <rect class="region" data-label="Left Upper Arm" x="148" y="116" width="22" height="60" rx="8" />
+        <rect class="region" data-label="Left Forearm" x="148" y="178" width="22" height="55" rx="8" />
+        <!-- Left Hand -->
+        <ellipse class="region" data-label="Left Hand" cx="159" cy="248" rx="14" ry="12" />
+        <!-- Right Thigh -->
+        <rect class="region" data-label="Right Thigh" x="67" y="251" width="28" height="70" rx="8" />
+        <!-- Left Thigh -->
+        <rect class="region" data-label="Left Thigh" x="105" y="251" width="28" height="70" rx="8" />
+        <!-- Right Knee -->
+        <ellipse class="region" data-label="Right Knee" cx="81" cy="330" rx="14" ry="12" />
+        <!-- Left Knee -->
+        <ellipse class="region" data-label="Left Knee" cx="119" cy="330" rx="14" ry="12" />
+        <!-- Right Lower Leg -->
+        <rect class="region" data-label="Right Lower Leg" x="67" y="342" width="28" height="80" rx="8" />
+        <!-- Left Lower Leg -->
+        <rect class="region" data-label="Left Lower Leg" x="105" y="342" width="28" height="80" rx="8" />
+        <!-- Right Foot -->
+        <ellipse class="region" data-label="Right Foot" cx="77" cy="433" rx="18" ry="11" />
+        <!-- Left Foot -->
+        <ellipse class="region" data-label="Left Foot" cx="123" cy="433" rx="18" ry="11" />
+      </svg>
+    </figure>
+
+    <!-- POSTERIOR VIEW -->
+    <figure class="body-figure">
+      <figcaption class="view-label">Posterior (Back)</figcaption>
+      <svg
+        viewBox="0 0 200 480"
+        xmlns="http://www.w3.org/2000/svg"
+        class="body-svg"
+        role="img"
+        aria-label="Posterior body diagram"
+      >
+        <!-- Head back -->
+        <ellipse class="region" data-label="Back of Head" cx="100" cy="38" rx="30" ry="35" />
+        <!-- Neck posterior -->
+        <rect class="region" data-label="Neck (Posterior)" x="88" y="71" width="24" height="20" rx="4" />
+        <!-- Upper Back / Shoulders -->
+        <rect class="region" data-label="Upper Back" x="60" y="91" width="80" height="35" rx="6" />
+        <!-- Scapulae -->
+        <ellipse class="region" data-label="Right Scapula" cx="73" cy="112" rx="14" ry="14" />
+        <ellipse class="region" data-label="Left Scapula" cx="127" cy="112" rx="14" ry="14" />
+        <!-- Right Shoulder back -->
+        <ellipse class="region" data-label="Right Shoulder" cx="52" cy="101" rx="18" ry="16" />
+        <!-- Left Shoulder back -->
+        <ellipse class="region" data-label="Left Shoulder" cx="148" cy="101" rx="18" ry="16" />
+        <!-- Mid Back -->
+        <rect class="region" data-label="Mid Back" x="60" y="126" width="80" height="40" rx="4" />
+        <!-- Lumbar -->
+        <rect class="region" data-label="Lumbar Region" x="66" y="166" width="68" height="40" rx="4" />
+        <!-- Sacrum / Coccyx -->
+        <rect class="region" data-label="Sacrum / Coccyx" x="76" y="206" width="48" height="25" rx="6" />
+        <!-- Buttocks -->
+        <ellipse class="region" data-label="Right Buttock" cx="81" cy="240" rx="20" ry="18" />
+        <ellipse class="region" data-label="Left Buttock" cx="119" cy="240" rx="20" ry="18" />
+        <!-- Right Arm back -->
+        <rect class="region" data-label="Right Upper Arm" x="30" y="116" width="22" height="60" rx="8" />
+        <rect class="region" data-label="Right Forearm" x="30" y="178" width="22" height="55" rx="8" />
+        <ellipse class="region" data-label="Right Hand" cx="41" cy="248" rx="14" ry="12" />
+        <!-- Left Arm back -->
+        <rect class="region" data-label="Left Upper Arm" x="148" y="116" width="22" height="60" rx="8" />
+        <rect class="region" data-label="Left Forearm" x="148" y="178" width="22" height="55" rx="8" />
+        <ellipse class="region" data-label="Left Hand" cx="159" cy="248" rx="14" ry="12" />
+        <!-- Right Posterior Thigh -->
+        <rect class="region" data-label="Right Posterior Thigh" x="67" y="258" width="28" height="65" rx="8" />
+        <!-- Left Posterior Thigh -->
+        <rect class="region" data-label="Left Posterior Thigh" x="105" y="258" width="28" height="65" rx="8" />
+        <!-- Posterior Knees -->
+        <ellipse class="region" data-label="Right Popliteal" cx="81" cy="330" rx="14" ry="12" />
+        <ellipse class="region" data-label="Left Popliteal" cx="119" cy="330" rx="14" ry="12" />
+        <!-- Posterior Lower Legs (calves) -->
+        <rect class="region" data-label="Right Calf" x="67" y="342" width="28" height="80" rx="8" />
+        <rect class="region" data-label="Left Calf" x="105" y="342" width="28" height="80" rx="8" />
+        <!-- Posterior Feet (heels) -->
+        <ellipse class="region" data-label="Right Heel / Foot" cx="77" cy="433" rx="18" ry="11" />
+        <ellipse class="region" data-label="Left Heel / Foot" cx="123" cy="433" rx="18" ry="11" />
+      </svg>
+    </figure>
+  </div>
+
+  <!-- Tooltip -->
+  <div id="region-tooltip" class="region-tooltip" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Legend -->
+  <section class="legend">
+    <h2>📍 Common Nursing Markings</h2>
+    <p class="legend-intro">
+      When annotating a printed body diagram, nurses use the following standard symbols:
+    </p>
+    <ul class="legend-list">
+      {markings.map((m) => (
+        <li class="legend-item">
+          <span class="legend-symbol">{m.symbol}</span>
+          <span class="legend-text">{m.label}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="print-hint no-print">
+    <p>
+      🖨️ <strong>Print tip:</strong> Press <kbd>Ctrl+P</kbd> / <kbd>⌘P</kbd> to print a blank
+      body diagram template for handwritten annotations.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Page header ── */
+  .page-header { margin-bottom: 1.75rem; }
+  .back-link { font-size: 0.875rem; color: var(--color-text-muted); display: inline-block; margin-bottom: 0.5rem; }
+  .page-header h1 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; color: var(--color-primary-dark); margin-bottom: 0.6rem; }
+  .page-intro { color: var(--color-text-muted); max-width: 720px; line-height: 1.7; font-size: 0.95rem; }
+
+  /* ── Body views ── */
+  .views-wrapper {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .body-figure {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    flex: 0 0 auto;
+  }
+
+  .view-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .body-svg {
+    width: 180px;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Regions ── */
+  .region {
+    fill: var(--color-primary-light);
+    stroke: var(--color-primary);
+    stroke-width: 1;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: fill 0.15s, opacity 0.15s;
+  }
+  .region:hover,
+  .region:focus {
+    fill: var(--color-primary);
+    opacity: 0.85;
+    outline: none;
+  }
+
+  /* ── Tooltip ── */
+  .region-tooltip {
+    position: fixed;
+    background: var(--color-primary-dark);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--radius);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s;
+    z-index: 500;
+    white-space: nowrap;
+    max-width: 220px;
+  }
+  .region-tooltip.visible { opacity: 1; }
+
+  /* ── Legend ── */
+  .legend {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.25rem;
+    max-width: 680px;
+  }
+
+  .legend h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .legend-intro {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .legend-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.5rem 1.5rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+  }
+
+  .legend-symbol {
+    font-size: 1.1rem;
+    width: 1.5rem;
+    text-align: center;
+    flex-shrink: 0;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .legend-text {
+    color: var(--color-text);
+  }
+
+  /* ── Print hint ── */
+  .print-hint {
+    background: var(--color-accent-light);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius);
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+    max-width: 680px;
+  }
+  .print-hint kbd {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  /* ── Print styles ── */
+  @media print {
+    .no-print { display: none !important; }
+    .page-intro { display: none; }
+
+    .views-wrapper {
+      gap: 3rem;
+      justify-content: space-around;
+    }
+
+    .body-figure {
+      border: 1px solid #ccc;
+      box-shadow: none;
+    }
+
+    .body-svg {
+      width: 220px;
+    }
+
+    .region {
+      fill: #e8f0fc;
+      stroke: #555;
+      opacity: 0.6;
+    }
+
+    .region-tooltip { display: none; }
+
+    .legend {
+      box-shadow: none;
+      border: 1px solid #ccc;
+      max-width: 100%;
+    }
+  }
+</style>
+
+<script>
+  const tooltip = document.getElementById('region-tooltip');
+
+  function showTooltip(label: string, x: number, y: number) {
+    if (!tooltip) return;
+    tooltip.textContent = label;
+    tooltip.classList.add('visible');
+    tooltip.style.left = `${x + 12}px`;
+    tooltip.style.top = `${y - 10}px`;
+  }
+
+  function hideTooltip() {
+    if (!tooltip) return;
+    tooltip.classList.remove('visible');
+  }
+
+  document.querySelectorAll<SVGElement>('.region').forEach((el) => {
+    const label = el.dataset.label ?? '';
+
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', label);
+
+    el.addEventListener('mouseenter', (e) => {
+      const me = e as MouseEvent;
+      showTooltip(label, me.clientX, me.clientY);
+    });
+
+    el.addEventListener('mousemove', (e) => {
+      const me = e as MouseEvent;
+      if (tooltip) {
+        tooltip.style.left = `${me.clientX + 12}px`;
+        tooltip.style.top = `${me.clientY - 10}px`;
+      }
+    });
+
+    el.addEventListener('mouseleave', () => {
+      hideTooltip();
+    });
+
+    el.addEventListener('focus', (e) => {
+      const target = e.target as SVGElement;
+      const rect = target.getBoundingClientRect();
+      showTooltip(label, rect.left + rect.width / 2, rect.top);
+    });
+
+    el.addEventListener('blur', () => {
+      hideTooltip();
+    });
+  });
+</script>

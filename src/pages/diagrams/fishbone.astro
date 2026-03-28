@@ -1,0 +1,379 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = (import.meta.env.BASE_URL as string).replace(/\/?$/, '/');
+
+interface Bone {
+  id: string;
+  label: string;
+  items: string[];
+}
+
+const bones: Bone[] = [
+  {
+    id: 'neuro',
+    label: 'Neuro',
+    items: ['LOC / GCS', 'Orientation ×4', 'Pupils (PERRLA)', 'Speech', 'Strength', 'Sensation', 'Behavior / mood'],
+  },
+  {
+    id: 'resp',
+    label: 'Resp',
+    items: ['RR & rhythm', 'O₂ sat (SpO₂)', 'Breath sounds', 'Work of breathing', 'O₂ delivery device', 'Cough / sputum'],
+  },
+  {
+    id: 'cv',
+    label: 'CV',
+    items: ['HR & rhythm', 'BP', 'Heart sounds (S1/S2)', 'Peripheral pulses', 'Capillary refill', 'Edema', 'Skin temp / color'],
+  },
+  {
+    id: 'gi',
+    label: 'GI',
+    items: ['Bowel sounds ×4', 'Abdomen (soft/firm)', 'Last BM', 'Diet / intake', 'Nausea / vomiting', 'NG tube / ostomy'],
+  },
+  {
+    id: 'gu',
+    label: 'GU',
+    items: ['Urine output (I&O)', 'Urine color / clarity', 'Foley catheter', 'Last void', 'BUN / Cr', 'Dialysis access'],
+  },
+  {
+    id: 'ms',
+    label: 'MS',
+    items: ['ROM / mobility', 'Gait / transfers', 'Fall risk score', 'Restraints', 'Casts / splints', 'PT/OT orders'],
+  },
+  {
+    id: 'skin',
+    label: 'Skin / Wound',
+    items: ['Skin integrity', 'Turgor / moisture', 'Pressure injury stage', 'Wound size / drainage', 'Dressing type', 'Braden score'],
+  },
+  {
+    id: 'pain',
+    label: 'Pain',
+    items: ['Scale (0–10)', 'Location', 'Quality / character', 'Onset / duration', 'Aggravating factors', 'Relieving factors', 'Last analgesic'],
+  },
+];
+---
+
+<BaseLayout
+  title="Fishbone Diagram"
+  description="Interactive nursing fishbone diagram for head-to-toe assessment documentation."
+>
+  <div class="page-header">
+    <a href={`${base}diagrams`} class="back-link">← Diagrams</a>
+    <h1>🐟 Fishbone Assessment Diagram</h1>
+    <p class="page-intro">
+      The <strong>fishbone diagram</strong> (also called an Ishikawa or cause-and-effect diagram)
+      is used in nursing to organize head-to-toe assessment data by body system. The horizontal
+      spine represents the patient; each angled "bone" represents a body system. Click any bone
+      label to expand its assessment data points.
+    </p>
+  </div>
+
+  <!-- SVG Fishbone -->
+  <div class="diagram-wrapper" aria-label="Fishbone diagram">
+    <svg
+      id="fishbone-svg"
+      viewBox="0 0 900 420"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="Nursing fishbone assessment diagram"
+    >
+      <!-- Spine -->
+      <line x1="60" y1="210" x2="820" y2="210" stroke="#1a56a4" stroke-width="4" stroke-linecap="round" />
+      <!-- Fish head arrow -->
+      <polygon points="820,210 795,196 795,224" fill="#1a56a4" />
+      <!-- Patient label -->
+      <text x="840" y="215" font-size="13" fill="#1a56a4" font-weight="700" text-anchor="start">Patient</text>
+
+      <!-- Fish tail -->
+      <line x1="60" y1="210" x2="80" y2="192" stroke="#1a56a4" stroke-width="3" stroke-linecap="round" />
+      <line x1="60" y1="210" x2="80" y2="228" stroke="#1a56a4" stroke-width="3" stroke-linecap="round" />
+
+      <!-- TOP BONES (above spine): Neuro, Resp, MS, Pain -->
+      <!-- Bone 1: Neuro (x=170) -->
+      <line x1="170" y1="210" x2="220" y2="130" stroke="#1a56a4" stroke-width="2.5" stroke-linecap="round" />
+      <text
+        x="222" y="125" font-size="14" fill="#0f3d7a" font-weight="700"
+        class="bone-label" data-bone="neuro" text-anchor="middle"
+        style="cursor:pointer"
+      >Neuro</text>
+
+      <!-- Bone 2: Resp (x=340) -->
+      <line x1="340" y1="210" x2="390" y2="130" stroke="#1a56a4" stroke-width="2.5" stroke-linecap="round" />
+      <text
+        x="392" y="125" font-size="14" fill="#0f3d7a" font-weight="700"
+        class="bone-label" data-bone="resp" text-anchor="middle"
+        style="cursor:pointer"
+      >Resp</text>
+
+      <!-- Bone 3: MS (x=510) -->
+      <line x1="510" y1="210" x2="560" y2="130" stroke="#1a56a4" stroke-width="2.5" stroke-linecap="round" />
+      <text
+        x="562" y="125" font-size="14" fill="#0f3d7a" font-weight="700"
+        class="bone-label" data-bone="ms" text-anchor="middle"
+        style="cursor:pointer"
+      >MS</text>
+
+      <!-- Bone 4: Pain (x=680) -->
+      <line x1="680" y1="210" x2="730" y2="130" stroke="#1a56a4" stroke-width="2.5" stroke-linecap="round" />
+      <text
+        x="732" y="125" font-size="14" fill="#0f3d7a" font-weight="700"
+        class="bone-label" data-bone="pain" text-anchor="middle"
+        style="cursor:pointer"
+      >Pain</text>
+
+      <!-- BOTTOM BONES (below spine): CV, GI, GU, Skin -->
+      <!-- Bone 5: CV (x=170) -->
+      <line x1="170" y1="210" x2="220" y2="290" stroke="#1a56a4" stroke-width="2.5" stroke-linecap="round" />
+      <text
+        x="222" y="308" font-size="14" fill="#0f3d7a" font-weight="700"
+        class="bone-label" data-bone="cv" text-anchor="middle"
+        style="cursor:pointer"
+      >CV</text>
+
+      <!-- Bone 6: GI (x=340) -->
+      <line x1="340" y1="210" x2="390" y2="290" stroke="#1a56a4" stroke-width="2.5" stroke-linecap="round" />
+      <text
+        x="392" y="308" font-size="14" fill="#0f3d7a" font-weight="700"
+        class="bone-label" data-bone="gi" text-anchor="middle"
+        style="cursor:pointer"
+      >GI</text>
+
+      <!-- Bone 7: GU (x=510) -->
+      <line x1="510" y1="210" x2="560" y2="290" stroke="#1a56a4" stroke-width="2.5" stroke-linecap="round" />
+      <text
+        x="562" y="308" font-size="14" fill="#0f3d7a" font-weight="700"
+        class="bone-label" data-bone="gu" text-anchor="middle"
+        style="cursor:pointer"
+      >GU</text>
+
+      <!-- Bone 8: Skin (x=680) -->
+      <line x1="680" y1="210" x2="730" y2="290" stroke="#1a56a4" stroke-width="2.5" stroke-linecap="round" />
+      <text
+        x="732" y="308" font-size="14" fill="#0f3d7a" font-weight="700"
+        class="bone-label" data-bone="skin" text-anchor="middle"
+        style="cursor:pointer"
+      >Skin/Wound</text>
+    </svg>
+  </div>
+
+  <!-- Detail panels -->
+  <div class="panels-grid">
+    {bones.map((bone) => (
+      <div class="bone-panel" id={`panel-${bone.id}`} data-bone={bone.id}>
+        <button class="panel-toggle" aria-expanded="false" aria-controls={`items-${bone.id}`}>
+          <span class="panel-label">{bone.label}</span>
+          <span class="panel-chevron" aria-hidden="true">▼</span>
+        </button>
+        <ul class="panel-items" id={`items-${bone.id}`} hidden>
+          {bone.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <section class="print-hint no-print">
+    <p>
+      🖨️ <strong>Print tip:</strong> Press <kbd>Ctrl+P</kbd> / <kbd>⌘P</kbd> to print a blank
+      fishbone template for handwritten notes.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Page header ── */
+  .page-header { margin-bottom: 1.75rem; }
+  .back-link { font-size: 0.875rem; color: var(--color-text-muted); display: inline-block; margin-bottom: 0.5rem; }
+  .page-header h1 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; color: var(--color-primary-dark); margin-bottom: 0.6rem; }
+  .page-intro { color: var(--color-text-muted); max-width: 720px; line-height: 1.7; font-size: 0.95rem; }
+
+  /* ── SVG wrapper ── */
+  .diagram-wrapper {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1rem;
+    margin-bottom: 1.75rem;
+    overflow-x: auto;
+  }
+
+  #fishbone-svg {
+    width: 100%;
+    max-width: 900px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .bone-label {
+    transition: fill 0.15s;
+  }
+  .bone-label:hover,
+  .bone-label.active {
+    fill: var(--color-accent) !important;
+  }
+
+  /* ── Panels grid ── */
+  .panels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .bone-panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s;
+  }
+  .bone-panel.active {
+    border-color: var(--color-primary);
+  }
+
+  .panel-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    text-align: left;
+    gap: 0.5rem;
+  }
+  .panel-toggle:hover { background: var(--color-primary-light); }
+  .panel-toggle[aria-expanded="true"] { background: var(--color-primary-light); }
+
+  .panel-chevron {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .panel-toggle[aria-expanded="true"] .panel-chevron {
+    transform: rotate(180deg);
+  }
+
+  .panel-items {
+    list-style: none;
+    padding: 0 1rem 0.75rem;
+    margin: 0;
+  }
+  .panel-items li {
+    padding: 0.25rem 0;
+    font-size: 0.875rem;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .panel-items li:last-child { border-bottom: none; }
+  .panel-items li::before { content: '• '; color: var(--color-primary); }
+
+  /* ── Print hint ── */
+  .print-hint {
+    background: var(--color-accent-light);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius);
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  .print-hint kbd {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  /* ── Print styles ── */
+  @media print {
+    .no-print { display: none !important; }
+    .page-intro { display: none; }
+
+    .diagram-wrapper {
+      border: none;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    #fishbone-svg {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .panels-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+
+    .bone-panel {
+      box-shadow: none;
+    }
+
+    /* Always expand all panels in print */
+    .panel-toggle { display: none; }
+    .panel-items { display: block !important; padding-top: 0.5rem; }
+
+    .panel-items::before {
+      content: attr(id);
+      display: block;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+    }
+  }
+</style>
+
+<script>
+  // Toggle bone panels
+  document.querySelectorAll<HTMLButtonElement>('.panel-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const itemsId = btn.getAttribute('aria-controls');
+      const items = itemsId ? document.getElementById(itemsId) : null;
+      const panel = btn.closest<HTMLElement>('.bone-panel');
+
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (items) items.hidden = expanded;
+      if (panel) panel.classList.toggle('active', !expanded);
+    });
+  });
+
+  // Click SVG bone labels to highlight the matching panel
+  document.querySelectorAll<SVGTextElement>('.bone-label').forEach((label) => {
+    label.addEventListener('click', () => {
+      const boneId = label.dataset.bone;
+      if (!boneId) return;
+
+      const panel = document.getElementById(`panel-${boneId}`);
+      const btn = panel?.querySelector<HTMLButtonElement>('.panel-toggle');
+      const itemsId = btn?.getAttribute('aria-controls');
+      const items = itemsId ? document.getElementById(itemsId) : null;
+
+      if (!btn || !items) return;
+
+      const alreadyOpen = btn.getAttribute('aria-expanded') === 'true';
+      if (!alreadyOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        items.hidden = false;
+        panel?.classList.add('active');
+      }
+
+      // Scroll panel into view
+      panel?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      // Briefly highlight the SVG label
+      label.classList.add('active');
+      setTimeout(() => label.classList.remove('active'), 1200);
+    });
+  });
+</script>
