@@ -1,0 +1,15 @@
+{
+  "name": "lab-reference",
+  "version": "1.0.0",
+  "description": "Nursing Lab Reference Values — an Astro.build site for nursing students",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^6.1.1"
+  }
+}
